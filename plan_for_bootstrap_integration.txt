@@ -1,0 +1,33 @@
+Here is the comprehensive plan for integrating Bootstrap for responsive features:
+
+### Information Gathered:
+- The current CSS files (`index.css` and `global.css`) contain styles that may need adjustments to incorporate Bootstrap's responsive utilities.
+- The layout files, such as `CreatePost.php`, `header.php`, and `master-left.php`, will also need modifications to utilize Bootstrap's grid system and components.
+
+### Plan:
+1. **Add Bootstrap CSS**:
+   - Include the Bootstrap CSS link in the `<head>` section of the main layout file (likely in `header.php` or `index.php`).
+
+2. **Update CSS Files**:
+   - Modify `public/css/index.css` and `public/css/global.css` to replace or enhance existing styles with Bootstrap classes where applicable.
+   - Remove any conflicting styles that may interfere with Bootstrap's default styling.
+
+3. **Modify Layout Files**:
+   - Update `layouts/general/CreatePost.php` to use Bootstrap's form classes for better responsiveness.
+   - Adjust `page_parts/basic/header.php` to utilize Bootstrap's navbar components.
+   - Update `page_parts/basic/master-left.php` and `master-right.php` to use Bootstrap's grid system for layout adjustments.
+
+4. **Testing**:
+   - After making the changes, test the application on various screen sizes to ensure responsiveness is achieved.
+
+### Dependent Files to be Edited:
+- `public/css/index.css`
+- `public/css/global.css`
+- `layouts/general/CreatePost.php`
+- `page_parts/basic/header.php`
+- `page_parts/basic/master-left.php`
+- `page_parts/basic/master-right.php`
+
+### Follow-up Steps:
+- Verify the changes in the files.
+- Test the application on different devices to ensure responsiveness.

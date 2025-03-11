@@ -1,10 +1,10 @@
 <?php
 
 namespace models;
-
+use JsonSerializable;
 use classes\{Hash, Config, Session, DB, Cookie};
 
-class User implements \JsonSerializable {
+class User implements JsonSerializable {
     private $db,
         $sessionName,
         $cookieName,
@@ -34,7 +34,7 @@ class User implements \JsonSerializable {
 
         if(Session::exists($this->sessionName)) {
             $dt = Session::get($this->sessionName);
-            
+
             if($this->fetchUser("id", $dt)) {
                 $this->isLoggedIn = true;
             }
@@ -44,7 +44,7 @@ class User implements \JsonSerializable {
     public function getPropertyValue($propertyName) {
         return $this->$propertyName;
     }
-    
+
     public function setPropertyValue($propertyName, $propertyValue) {
         $this->$propertyName = $propertyValue;
     }
@@ -131,7 +131,7 @@ class User implements \JsonSerializable {
             return false;
         }
     }
-    
+
     public function fetchUser($field_name, $field_value) {
         $this->db->query("SELECT * FROM user_info WHERE $field_name = ?", array($field_value));
 
@@ -176,13 +176,13 @@ class User implements \JsonSerializable {
         $this->private = $data["private"];
     }
 
-    /* 
+    /*
     Note that if you want to add new user by specifying id, you can actually fetch the last user and add 1 to its id,
     then class add function by adding id to add query
     */
     public function add() {
-        $this->db->query("INSERT INTO user_info 
-        (username, email, password, salt, firstname, lastname, joined, user_type) 
+        $this->db->query("INSERT INTO user_info
+        (username, email, password, salt, firstname, lastname, joined, user_type)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array(
             $this->username,
             $this->email,
@@ -315,9 +315,9 @@ class User implements \JsonSerializable {
             if($this->fetchUser($fetchBy, $email_or_username)) {
                 if($this->password === Hash::make($password, $this->salt)) {
                     Session::put($this->sessionName, $this->id);
-                    
-                    /* 
-                    This will only executed if user's credentials are good and he checks remember me: We generate a hash, 
+
+                    /*
+                    This will only executed if user's credentials are good and he checks remember me: We generate a hash,
                     check if the hash is not  already exists in user_session table and insert that hash into the database;
                     What happens is the user store a cookie with id and a hash and also the app store these infos in database
                     Next time the user visit the app we need to check if he has a cookie that identifies it, if so we compare the hash of it with hash in db
@@ -325,17 +325,17 @@ class User implements \JsonSerializable {
                     if($remember) {
                         $this->db->query("SELECT * FROM users_session WHERE user_id = ?",
                             array($this->id));
-                        
+
                         // If this user is not exists in users_sesion table
                         if(!$this->db->count()) {
                             $hash = Hash::unique();
-                            $this->db->query('INSERT INTO users_session (user_id, hash) VALUES (?, ?)', 
+                            $this->db->query('INSERT INTO users_session (user_id, hash) VALUES (?, ?)',
                                 array($this->id, $hash));
                         } else {
-                            // If the user does exist we 
+                            // If the user does exist we
                             $hash = $this->db->results()[0]->hash;
                         }
-    
+
                         Cookie::put($this->cookieName, $hash, Config::get("remember/cookie_expiry"));
                     }
                     return true;
@@ -370,7 +370,8 @@ class User implements \JsonSerializable {
         return $this->isLoggedIn;
     }
 
-    public function jsonSerialize()
+
+    public function JsonSerialize()
     {
         //$vars = get_object_vars($this);
         $vars = array(

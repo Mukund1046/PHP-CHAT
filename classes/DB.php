@@ -1,7 +1,7 @@
 <?php
 
 namespace classes;
-/* 
+/*
    DB Class follow Singleton pattern.
    We'll use the following class as following: $users = DB::getInstance()->query("SELECT * FROM users");
    DB::getInstance()->get("user", array('username', '=', 'mouad'))
@@ -26,10 +26,10 @@ class DB {
     }
 
     public static function getInstance() {
-        /* 
+        /*
         This function will first check if we've already instaiated an instance it will simply return th instance,
         otherwise, we're going to instatiate it by creating a DB object;
-        Hint: In case we use getInstance function twice on a page it will simply return the instance in the second 
+        Hint: In case we use getInstance function twice on a page it will simply return the instance in the second
               call because it will be instantiated in the first call
         Hint: Notice that DB class cannot be instatiated outiside the class because the constructor is private
         */
@@ -40,7 +40,7 @@ class DB {
 
         return self::$_instance;
     }
-    
+
     /*
     DB::getInstance()->query("SELECT * FROM user_info WHERE username = ?", array('MOUAD')); HERE MOUAD shuld be replaced
     in the first ? mark, if we have two parameters in query string, we need array of two values to replace each value to
@@ -48,7 +48,7 @@ class DB {
     */
     public function query($sql, $params = array()) {
         /* Here we set error to false in order to not return error of some previous query */
-        $this->error = false;
+        $this->_error = false;
 
         // Check if the query has been prepared successfully
         // Here we assign and at the sametime check if a prepared statement has been set
@@ -58,15 +58,15 @@ class DB {
                 $count = 1;
                 foreach($params as $param) {
 
-                    /* FROM Documentation: 
+                    /* FROM Documentation:
                     Parameter identifier. For a prepared statement using named placeholders, this will be a parameter name of the form :name. For a prepared statement using question mark placeholders, this will be the 1-indexed position of the parameter.
-                    
+
                     We are using quesion mark in our queries
 
                     if query = "SELECT * FROM user_info WHERE username = ? AND password = ?;
                                                                          ^                ^
                                                                    count:1          count:2
-                    count1 will point to username value which will be filled by first array element, and the same thing occur to the second part 
+                    count1 will point to username value which will be filled by first array element, and the same thing occur to the second part
                     */
                     $this->_query->bindValue($count, $param);
                     $count++;
@@ -102,5 +102,3 @@ class DB {
         return $this->_count;
     }
 }
-
-

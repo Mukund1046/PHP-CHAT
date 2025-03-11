@@ -41,7 +41,7 @@ RNC;
             // Get message date by substracting current date with the date of message
             $now = strtotime(date("Y/m/d h:i:s"));
             $seconds = floor($now - strtotime($sender->since));
-            
+
             if($seconds > 29030400) {
                 $request_life = floor($seconds / 29030400) . "y";
             } else if($seconds > 2419200) {
@@ -87,7 +87,7 @@ FR;
     $discussions = Message::get_discussions($cuid);
     $temp = array();
     $result = array();
-    
+
     foreach($discussions as $discussion) {
 
         $current_disc = array(
@@ -96,7 +96,7 @@ FR;
         );
 
         if(in_array($current_disc, $temp)) {
-            continue; 
+            continue;
         }
 
         $temp[] = array(
@@ -123,7 +123,7 @@ FR;
         $message_state_icon = "";
         if($message->message_creator == $cuid) {
             $message_text = "You: " . $message_text;
-            
+
             if($msg_r->is_read) {
                 $icon_path = $friend_image;
             } else {
@@ -132,7 +132,7 @@ FR;
             $message_state_icon = <<<MSI
             <div style="margin-left: auto">
                 <img src="$icon_path" class="message-state-sign" alt="message state icon">
-            </div>     
+            </div>
 MSI;
         }
         $message_lifetime = $message->message_date;
@@ -156,7 +156,11 @@ MSG;
 
     $setting_path = Config::get("root/path") . "settings.php";
 ?>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 <header>
+
     <div id="top-header">
         <div id="header-logo-container">
             <!-- height of <a> should be like img height -->
@@ -272,8 +276,8 @@ MSG;
                                 </div>
                             </button>
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="logout-form">
-                                <input type="hidden" name="token_logout" value="<?php 
-                                    if(Session::exists("logout")) 
+                                <input type="hidden" name="token_logout" value="<?php
+                                    if(Session::exists("logout"))
                                         echo Session::get("logout");
                                     else {
                                         echo Token::generate("logout");

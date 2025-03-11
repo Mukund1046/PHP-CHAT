@@ -1,32 +1,291 @@
 .login-img-reg-container {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0 auto;
+}
+.classic-label{
+    color: white;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    font-weight: 200;
+}
+#registration-section {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: fit-content;
+    flex: 0 0 350px;
+    margin-left: auto; /* Reset margin to prevent overlap */
+    margin-top: 50px;
+    margin-right: 60px;
+    border-radius: 10px;
+    align-items: stretch;
+    background-color: black;
+    border:1px solid #fff;
+    perspective: 1000px;
 }
 
-#registration-section {
-    padding: 14px;
-    margin-right: 14px;
-    width: 300px;
-    flex: 0 0 300px;
+.title-style1 {
+    text-align: center; /* Align the title to the right */
+    font-size: 24px; /* Set font size for better readability */
+    font-weight: bold; /* Set font weight to bold */
+    width:100%;
+    color: black; /* Change text color to white for better visibility */
+    font-family: 'JetBrains Mono', monospace; /* Set font to JetBrains Mono */
+    font-weight: 800;
+    box-sizing: border-box;
+    background-color:white;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+.inner-flex-box
+{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-left: 16px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align the form to the right */
+    margin-right: 20px; /* Add margin to separate from the right */
+    margin-top: 28px;
+    justify-content: center;
 }
 
 #left-asset-wrapper {
-    width: 100%;
+    width: 50%; /* Set width to 50% */
     display: flex;
+    size: 50%;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     box-sizing: border-box;
-
-    padding: 0px 60px;
+    padding: 0px 20px;
+    margin-left: auto; /* Adjust padding for better appearance */
+    margin-right: 10px; /* Add margin to separate from registration section */
+    margin-top: 120px; /* Remove margin to align correctly */
 }
 
 #login-image-preview {
     display: flex;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 600px; /* Reduce the size of the logo */
 }
 
 #login-left-text {
-    font-size: 19px;
+    font-size: 20px;
+    font-weight: 100;
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    display: inline-block;
+    gap:1px;
+    transition: all 1s ease-in-out;
+    text-transform: capitalize;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    margin: 0 0 18px 0;
+}
+
+#login-left-text span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                font-weight 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: center bottom;
+}
+
+/* Hover effect applies only to the hovered letter */
+#login-left-text span:hover {
+    transform: scale(1.8)skew(-15deg);
+    transition-property: weight;
+    font-style: italic;
+    font-weight: 800;
+    gap: 2px;
+}
+
+/* Slight propagation effect to adjacent letters */
+#login-left-text span:hover + span {
+    transform: scale(1.2)skew(-15deg);
+    font-weight: 600;
+    gap: 4px;
+    transition-delay: 0.6s;
+}
+
+#login-left-text span:has(+ span:hover) {
+    transform: scale(1.2)skew(-15deg);
+    font-weight: 600;
+    gap: 4px;
+    transition-delay: 0.6s;
+}
+
+/* Reset effect when mouse leaves */
+#login-left-text span {
+    transform: scale(1);
+    font-weight: 100;
+}
+
+
+
+/* Add underline to input labels */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    border: none; /* Remove default border */
+    border-bottom: 1px solid white; /* Add underline with white color */
+    outline: none; /* Remove outline */
+    background-color: transparent; /* Remove background */
+    color: white; /* Set input text color to white */
+    font-family: 'JetBrains Mono', monospace; /* Revert font to JetBrains Mono */
+    text-transform: uppercase;
+    font-size: x-small;
+    justify-content: center;
+    align-items: center;
+    max-width: 320px; /* Transform text to uppercase */
+
+}
+input[type="checkbox"]{
+    width: 8px;
+    height: 8px;
+}
+
+/* Add line under the header */
+.header-line {
+    height: 4px; /* Set the height of the line */
+    background-color:#d9d9d9; /* Set the same color as the header */
+}
+
+/* Set background color for the login page and header */
+body, header {
+    background-color: black; /* Set background color to black */
+}
+
+
+/* Style for the registration button */
+/* General Button Styles */
+.button-style {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: white; /* Ensure contrast */
+    border: 2px solid white; /* Minimalist white border */
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
+    font-weight: 600;
+    padding: 10px 15px;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    align-items: center;
+    flex-direction: row;
+    text-align: center;
+    width: auto;
+    min-width: 120px;
+    margin-top: 10px;
+    z-index: 7;
+    position: relative;
+    overflow: hidden;
+}
+.button-style span{
+    position: relative;
+    background: linear-gradient(
+        90deg,#fff,#ff00ff,#00ffff,#fff
+    );
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+    display: inline-block;
+}
+@keyframes shine {
+    0%{
+        background-position: -100% 0;
+    }
+    100%{
+        background-position: 100% 0;
+    }
+}
+/* Hover Effects */
+.button-style:hover {
+    background: linear-gradient(to bottom, #333, #444);
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Star Border Container */
+.button-star-container {
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 3px;
+    background: transparent;
+}
+
+/* Star Animation Elements */
+.button-star-container::before,
+.button-star-container::after {
+    content: '';
+    position: absolute;
+    width: 300%;
+    height: 50%;
+    opacity: 0.7;
+    border-radius: 50%;
+    z-index: 0;
+    animation-duration: 3s;
+}
+
+/* Animated Border Effects */
+.button-star-container:hover::before {
+    bottom: -11px;
+    right: -250%;
+    animation-name: star-movement-bottom;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.button-star-container:hover::after {
+    top: -10px;
+    left: -250%;
+    animation-name: star-movement-top;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Keyframe Animations */
+@keyframes star-movement-bottom {
+    0% {
+        transform: translate(0%, 0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-100%, 0%);
+        opacity: 0;
+    }
+}
+
+@keyframes star-movement-top {
+    0% {
+        transform: translate(0%, 0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(100%, 0%);
+        opacity: 0;
+    }
 }

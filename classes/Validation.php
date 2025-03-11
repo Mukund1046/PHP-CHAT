@@ -1,7 +1,6 @@
 <?php
 
 namespace classes;
-
 class Validation {
     private $_passed = true,
             $_errors = array(),
@@ -12,7 +11,7 @@ class Validation {
     }
 
     /*
-        IMPORTANT: check function will get $source argument as POST or GET arrays to fetch data from them and an array 
+        IMPORTANT: check function will get $source argument as POST or GET arrays to fetch data from them and an array
         of values which are inputs and each of this values has an array of rules as the value like the following :
         $validate = new Validation();
 
@@ -28,12 +27,12 @@ class Validation {
             "max"=>50
         )
         ....
-        
+
         now we we gonna loop through the array of items and each item has an array of rules so we need also to loop through
         the rules array and first we need to check if the field is required. if the field is required but the value is missing
         there's no point to do the rest checks, we just add an error to _errors array
         if the value is not empty we need to make a switch case for each rule
-        
+
     */
     public function check($source, $items = array()) {
         error_reporting(E_ERROR | E_PARSE);
@@ -54,14 +53,14 @@ class Validation {
                                     $this->addError("Only PNG images are allowed in {$rules['name']} image!");
                                 }
 
-                                 Do not rely on any of the data in $_FILES. Many sites tell you to check the mime type of the file, 
+                                 Do not rely on any of the data in $_FILES. Many sites tell you to check the mime type of the file,
                                 either from $_FILES[0]['type'] or by checking the filename's extension. Do not do this. Everything under
-                                $_FILES with the exception of tmp_name can be manipulated by a malicious user. If you know you want images 
-                                ony call getimagesize as it actually reads image data and will know if the file is really an image. 
-                                
+                                $_FILES with the exception of tmp_name can be manipulated by a malicious user. If you know you want images
+                                ony call getimagesize as it actually reads image data and will know if the file is really an image.
+
                                 CAUTION: (from PHP Doc)
-                                Do not use getimagesize() to check that a given file is a valid image. Use a purpose-built solution such as the Fileinfo 
-                                extension instead. 
+                                Do not use getimagesize() to check that a given file is a valid image. Use a purpose-built solution such as the Fileinfo
+                                extension instead.
                                 */
                                 // ----------------------      CHECK IMAGE TYPE      ----------------------
 
@@ -107,7 +106,7 @@ class Validation {
 
                                 // Add some layer of image upload security later
                             break;
-                            case 'video': 
+                            case 'video':
                                 $file = $item;
                                 $allowedVideoExtensions = array(".mp4", ".mov", ".wmv", ".flv", ".avi", ".avchd", ".webm", ".mkv");
 
@@ -137,7 +136,7 @@ class Validation {
                 foreach($rules as $rule => $rule_value) {
                     $value = trim($source[$item]);
                     $item = htmlspecialchars($item);
-    
+
                     if($rule === "required" && $rule_value == true && empty($value)) {
                         $this->addError("{$rules['name']} field is required");
                     } else if(!empty($value)) {
@@ -193,7 +192,7 @@ class Validation {
                         }
                     }
                 }
-            }   
+            }
         }
 
         if(empty($this->_errors)) {
