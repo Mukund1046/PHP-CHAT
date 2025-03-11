@@ -39,7 +39,7 @@
                 $log = $user->login(Common::getInput($_POST, "email-or-username"), Common::getInput($_POST, "password"), $remember);
 
                 if($log) {
-                    Redirect::to("../index.php");
+                    Redirect::to("/index.php");
                 } else {
                     // Here define a variable with value and display it in error div in case credentials are wrong
                     $login_failure_message = "Either email or password is invalid!";

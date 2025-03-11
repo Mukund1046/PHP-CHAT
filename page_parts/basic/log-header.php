@@ -10,7 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 <header>
     <div>
-        <a href="<?php echo Config::get("root/path") . "index.php"; ?>"><img src="<?php echo $pathToLogo ?>public/assets/images/logos/Chroma 772.png" alt="logo" class="wide-logo"></a>
+    <a href="<?php echo Config::get("root/path") . "index.php"; ?>">
+    <img src="<?php echo Config::get("root/path") . "public/assets/images/logos/Chroma772.png"; ?>"
+         alt="logo" class="wide-logo">
+</a>
+
     </div>
     <div id="menu-login-credentials-container">
         <div style="margin: 0 12px"></div>

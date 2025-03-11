@@ -13,7 +13,7 @@ $GLOBALS["config"] = array(
         'host'=>'127.0.0.1',
         'username'=>'root',
         'password'=>'',
-        'db'=>'chat'
+        'db'=>'chroma'
     ),
     "remember"=> array(
         'cookie_name'=>'hash',
@@ -25,15 +25,15 @@ $GLOBALS["config"] = array(
         "tokens"=>array(
             "register"=>"register",
             "login"=>"login",
-            "reset-pasword"=>"reset-pasword",
+            "reset-password"=>"reset-password",
             "saveEdits"=>"saveEdits",
             "share-post"=>"share-post",
             "logout"=>"logout"
         )
     ),
     "root"=> array(
-        'path'=>'http://127.0.0.1/CHAT/',
-        'project_name'=>"CHAT"
+        'path'=>'http://chroma.local/',
+        'project_name'=>"CHROMA"
     )
 );
 
@@ -41,10 +41,10 @@ $GLOBALS["config"] = array(
 
 Here we create a user object with no data associated to it, and in the user constructor, we check if there's already a session
 if so we get the data from session which is the user id, and we fetch data from database of that id and we see if that id really
-exists in database, if it is, WE ASSIGN TRUE TO isLoggedIn 
+exists in database, if it is, WE ASSIGN TRUE TO isLoggedIn
 
 Then we check if there's a cookie set in user machine and there's no session (This case is like we switch user's computer and later tries to logged in)
-in this case we fetch the hash of user's machine and see if this hash exists in users_session table in database, if hash matches we fetch user_id associated with it 
+in this case we fetch the hash of user's machine and see if this hash exists in users_session table in database, if hash matches we fetch user_id associated with it
 and use it to fetch user with that id. if the count of fetching is 1 then we give username, password and true($remember=true) to login function
 
 go to login function's comment
@@ -74,10 +74,10 @@ if($user->getPropertyValue("isLoggedIn")) {
     $user->update_active();
 }
 
-/* 
-IMPORTANT : 
+/*
+IMPORTANT :
 1 - sanitize function file could not be included here because the path will be relative to the caller script
-so if for example include it like following: include_once "functions/sanitize.php" only scripts in the root 
+so if for example include it like following: include_once "functions/sanitize.php" only scripts in the root
 directory can use it, otherwise a fatal error will be thrown
 So you should include it along with autoload and init file in every page needs it
 
